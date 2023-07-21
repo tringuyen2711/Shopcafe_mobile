@@ -1,11 +1,10 @@
 package com.example.shopcafe;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 
-import java.sql.Time;
+import androidx.appcompat.app.AppCompatActivity;
+
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -21,7 +20,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
                 // Activity to page 2
+                Intent intent = new Intent(MainActivity.this, page2.class);
+                startActivity(intent);
             }
-        },5000);
+        },2000);
     }
+
 }
