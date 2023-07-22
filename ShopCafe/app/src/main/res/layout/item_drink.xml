@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="20dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginEnd="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <ImageView
+            android:id="@+id/drink"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:src="@drawable/cafe"
+            android:padding="1dp"
+            android:scaleType="centerInside"/>
+
+        <TextView
+            android:id="@+id/Text_drink"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/Cafe"
+            android:textSize="20dp"
+            android:padding="5dp"
+            android:gravity="center"
+            android:textColor="@color/black"
+            />
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

@@ -3,4 +3,12 @@
     <string name="name_brand">Ordinary Coffee House</string>
     <string name="buy_icon">Buy</string>
     <string name="Profile_icon">Profile</string>
+    <string name="Greeting_moring">Good Morning</string>
+    <string name ="loyaltycard">Loyalty card</string>
+    <string name="Choosedrink">Choose your drink</string>
+    <string name ="Home">Home</string>
+    <string name="Gift">Gift</string>
+    <string name="Order">Order</string>
+    <string name="Americano">Americano</string>
+    <string name="Cafe">Cafe</string>
 </resources>
