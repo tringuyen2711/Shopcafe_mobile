@@ -4,11 +4,21 @@
     <string name="buy_icon">Buy</string>
     <string name="Profile_icon">Profile</string>
     <string name="Greeting_moring">Good Morning</string>
-    <string name ="loyaltycard">Loyalty card</string>
+    <string name="loyaltycard">Loyalty card</string>
     <string name="Choosedrink">Choose your drink</string>
-    <string name ="Home">Home</string>
+    <string name="Home">Home</string>
     <string name="Gift">Gift</string>
     <string name="Order">Order</string>
     <string name="Americano">Americano</string>
     <string name="Cafe">Cafe</string>
+    <string name="On_going">On going</string>
+    <string name="History">History</string>
+    <string name="My_order">My Order</string>
+    <string name="Rewards">Rewards</string>
+    <string name="My_points">My Points:</string>
+    <string name="marks">0</string>
+    <string name="Redeem">Redeem drinks</string>
+    <string name="His_reward">History Rewords</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
