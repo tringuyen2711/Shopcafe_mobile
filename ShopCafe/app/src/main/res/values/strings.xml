@@ -19,6 +19,27 @@
     <string name="marks">0</string>
     <string name="Redeem">Redeem drinks</string>
     <string name="His_reward">History Rewords</string>
+    <!-- fragment of drink details -->
+    <string name="Details">Details</string>
+    <string name="Shot">Shot</string>
+    <string name="Select">Select</string>
+    <string name="Size">Size</string>
+    <string name="Ice">Ice</string>
+    <string name="Total_Amount">Total Amount</string>
+    <string name="Money">0</string>
+    <string name="Single">Single</string>
+    <string name="minus">-</string>
+    <string name="plus">+</string>
+    <string name="leftarrow">Back</string>
+    <string name="quantity">1</string>
+    <string name="Big_size">Big size</string>
+    <string name="Mid_size">Mid size</string>
+    <string name="Small_size">Small size</string>
+    <string name="Cup_tea">Cup tea</string>
+    <string name="Bottle">Bottle</string>
+    <string name="Add_to_Cart">Add to cart</string>
+    <string name="dou">Double</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>

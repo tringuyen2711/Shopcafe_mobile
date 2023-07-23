@@ -1,5 +1,6 @@
 package com.example.shopcafe;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -52,7 +53,7 @@ public class Home extends Fragment {
         gridLayoutManager = new GridLayoutManager(getActivity(),2);
         revDrink.setLayoutManager(gridLayoutManager);
 
-        DrinkApdapter adapter = new DrinkApdapter(getlistdrink());
+        DrinkApdapter adapter = new DrinkApdapter(getContext(),getlistdrink());
         revDrink.setAdapter(adapter);
         // Inflate the layout for this fragment
 
@@ -72,12 +73,13 @@ public class Home extends Fragment {
     }
     private List<Drink> getlistdrink() {
         List<Drink> list = new ArrayList<>();
-        list.add(new Drink(R.drawable.cafe,"Cafe",Drink.TYPE_DRINK));
-        list.add(new Drink(R.drawable.capuchino,"Capuchino",Drink.TYPE_DRINK));
-        list.add(new Drink(R.drawable.mocha,"Mocha",Drink.TYPE_DRINK));
-        list.add(new Drink(R.drawable.flatwhite,"Flat White",Drink.TYPE_DRINK));
-        list.add(new Drink(R.drawable.flatwhite,"Flat White",Drink.TYPE_DRINK));
-        list.add(new Drink(R.drawable.flatwhite,"Flat White",Drink.TYPE_DRINK));
+        list.add(new Drink(R.drawable.cafe,"Cafe",Drink.TYPE_DRINK, 15));
+        list.add(new Drink(R.drawable.capuchino,"Capuchino",Drink.TYPE_DRINK,20));
+        list.add(new Drink(R.drawable.mocha,"Mocha",Drink.TYPE_DRINK,30));
+        list.add(new Drink(R.drawable.flatwhite,"Flat White",Drink.TYPE_DRINK,35));
+
         return list;
     }
+
+
 }
