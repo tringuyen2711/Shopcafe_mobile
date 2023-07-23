@@ -82,22 +82,23 @@ public class page2 extends AppCompatActivity {
 
 
         mBottomNavigationView = findViewById(R.id.bottomNavigationView);
-        getSupportFragmentManager().beginTransaction().replace(R.id.view_paper, Homefragent).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.full_paper, Homefragent).commit();
         mBottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int itemId = item.getItemId();
                 if (itemId == R.id.home) {
-                    getSupportFragmentManager().beginTransaction().replace(R.id.view_paper, Homefragent).commit();
+
+                    getSupportFragmentManager().beginTransaction().replace(R.id.full_paper, Homefragent).addToBackStack(null).commit();
                     return true;
                 } else if (itemId == R.id.gift) {
-                    getSupportFragmentManager().beginTransaction().replace(R.id.view_paper, Gift).commit();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.full_paper, Gift).addToBackStack(null).commit();
                     return true;
                 } else if (itemId == R.id.order) {
-                    getSupportFragmentManager().beginTransaction().replace(R.id.view_paper, Order).commit();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.full_paper, Order).addToBackStack(null).commit();
                     return true;
                 } else{
-                getSupportFragmentManager().beginTransaction().replace(R.id.view_paper, Homefragent).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.full_paper, Homefragent).addToBackStack(null).commit();
                 return true;
                 }
             }

@@ -31,7 +31,7 @@ public class Details_Drink extends AppCompatActivity {
     boolean size_big =false, size_mid=false, size_small = false;
     boolean ice_3 = false, ice_2 = false, ice_1= false;
     int temp_cal= 0;
-    @SuppressLint("MissingInflatedId")
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

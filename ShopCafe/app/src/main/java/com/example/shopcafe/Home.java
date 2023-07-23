@@ -5,7 +5,9 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -19,9 +21,11 @@ import java.util.Calendar;
 import java.util.List;
 
 
-public class Home extends Fragment {
+public class Home extends Fragment implements DrinkApdapter.OnClickItemListener {
     TextView greeting_text;
     private RecyclerView revDrink;
+    List<Drink> list ;
+
     private GridLayoutManager gridLayoutManager;
 
     public Home(){}
@@ -53,7 +57,7 @@ public class Home extends Fragment {
         gridLayoutManager = new GridLayoutManager(getActivity(),2);
         revDrink.setLayoutManager(gridLayoutManager);
 
-        DrinkApdapter adapter = new DrinkApdapter(getContext(),getlistdrink());
+        DrinkApdapter adapter = new DrinkApdapter(getlistdrink(), this);
         revDrink.setAdapter(adapter);
         // Inflate the layout for this fragment
 
@@ -72,14 +76,26 @@ public class Home extends Fragment {
         return inflater.inflate(R.layout.fragment_home, container, false);
     }
     private List<Drink> getlistdrink() {
-        List<Drink> list = new ArrayList<>();
-        list.add(new Drink(R.drawable.cafe,"Cafe",Drink.TYPE_DRINK, 15));
-        list.add(new Drink(R.drawable.capuchino,"Capuchino",Drink.TYPE_DRINK,20));
-        list.add(new Drink(R.drawable.mocha,"Mocha",Drink.TYPE_DRINK,30));
-        list.add(new Drink(R.drawable.flatwhite,"Flat White",Drink.TYPE_DRINK,35));
-
+        if(list == null) {
+            list = new ArrayList<>();
+            list.add(new Drink(R.drawable.cafe, "Cafe", Drink.TYPE_DRINK, 15));
+            list.add(new Drink(R.drawable.capuchino, "Capuchino", Drink.TYPE_DRINK, 20));
+            list.add(new Drink(R.drawable.mocha, "Mocha", Drink.TYPE_DRINK, 30));
+            list.add(new Drink(R.drawable.flatwhite, "Flat White", Drink.TYPE_DRINK, 35));
+        }
         return list;
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+    }
 
+    @Override
+    public void ClickItem(Drink drink_items) {
+        Fragment fragment = Drink_child_details.newInstance(drink_items.getName(), drink_items.getImage(),
+                drink_items.getPrice());
+        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.home_frag,fragment).addToBackStack(null).commit();
+    }
 }

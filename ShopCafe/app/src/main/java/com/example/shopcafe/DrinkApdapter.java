@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,11 +22,12 @@ import java.util.List;
 
 public class DrinkApdapter extends RecyclerView.Adapter<DrinkApdapter.DrinkViewHolder> {
     private List<Drink> liDrink;
-    private Context mContext;
+    private OnClickItemListener onClickItemListener;
 
-    public DrinkApdapter(Context context,List<Drink> liDrink) {
+
+    public DrinkApdapter(List<Drink> liDrink, OnClickItemListener onClickItemListener) {
         this.liDrink = liDrink;
-        this.mContext=context;
+        this.onClickItemListener = onClickItemListener;
     }
 
     @NonNull
@@ -46,17 +48,24 @@ public class DrinkApdapter extends RecyclerView.Adapter<DrinkApdapter.DrinkViewH
         holder.imDrink.setImageResource(drink.getImage());
         holder.tvNameDrink.setText(drink.getName());
 
-        holder.layout_item.setOnClickListener(new View.OnClickListener() {
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(mContext, Details_Drink.class);
-                intent.putExtra("Name", liDrink.get(position).getName());
-                intent.putExtra("Price",liDrink.get(position).getPrice());
-                intent.putExtra("Img",liDrink.get(position).getPrice());
-                mContext.startActivity(intent);
-                //Toast.makeText(mContext, "Open" + position, Toast.LENGTH_SHORT).show();
+                onClickItemListener.ClickItem(drink);
             }
         });
+
+//        holder.layout_item.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(view.getContext(), Details_Drink.class);
+//                intent.putExtra("Name", liDrink.get(position).getName());
+//                intent.putExtra("Price",liDrink.get(position).getPrice());
+//                intent.putExtra("Img",liDrink.get(position).getPrice());
+//                view.getContext().startActivity(intent);
+//                //Toast.makeText(mContext, "Open" + position, Toast.LENGTH_SHORT).show();
+//            }
+//        });
 
     }
 
@@ -88,5 +97,10 @@ public class DrinkApdapter extends RecyclerView.Adapter<DrinkApdapter.DrinkViewH
         }
 
 
+
+    }
+
+    public interface OnClickItemListener{
+        public void ClickItem(Drink drink_items);
     }
 }
