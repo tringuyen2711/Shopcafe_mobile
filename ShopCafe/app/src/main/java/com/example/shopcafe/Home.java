@@ -42,13 +42,15 @@ public class Home extends Fragment implements DrinkApdapter.OnClickItemListener 
         return fragment;
     }
 
+
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         greeting_text = (TextView) getView().findViewById(R.id.greeting);
         uname = (TextView) getView().findViewById(R.id.name_user);
         profile = (ImageButton) getView().findViewById(R.id.profile);
-        check_insert();
+
         id = user1.getId();
         usname = user1.getUsername();
         uname.setText(user1.getUsername());
@@ -104,7 +106,7 @@ public class Home extends Fragment implements DrinkApdapter.OnClickItemListener 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
+        check_insert();
         return inflater.inflate(R.layout.fragment_home, container, false);
     }
     private List<Drink> getlistdrink() {

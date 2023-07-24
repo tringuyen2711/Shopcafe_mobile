@@ -47,5 +47,8 @@
     <string name="full_name">Full name</string>
     <string name="address">Address</string>
     <string name="edit">Edit</string>
+    <string name="idioms">Your order has been placed successfully. \n For more details, go to my orders.</string>
+    <string name="order_success">Order Success</string>
+    <string name="track_my_order">Track My Order</string>
 
 </resources>
