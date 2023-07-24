@@ -5,7 +5,9 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".Drink_child_details">
+    tools:context=".Drink_child_details"
+    android:clickable="true"
+    android:focusable="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout5"
@@ -198,7 +200,6 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="24dp"
             android:background="@drawable/bottle"
-            android:backgroundTint="@color/stroke"
             android:contentDescription="Bottle"
             app:layout_constraintBottom_toBottomOf="@+id/constraintLayout8"
             app:layout_constraintEnd_toEndOf="@+id/constraintLayout8"
@@ -238,11 +239,10 @@
 
         <ImageButton
             android:id="@+id/big_cup"
-            android:layout_width="42dp"
-            android:layout_height="42dp"
+            android:layout_width="43dp"
+            android:layout_height="43dp"
             android:layout_marginEnd="24dp"
-            android:background="@drawable/bigsize"
-            android:backgroundTint="@color/stroke"
+            android:background="@drawable/midsize"
             android:contentDescription="@string/Big_size"
             app:layout_constraintBottom_toBottomOf="@+id/constraintLayout9"
             app:layout_constraintEnd_toEndOf="@+id/constraintLayout9"
@@ -251,11 +251,10 @@
 
         <ImageButton
             android:id="@+id/mid_cup"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
             android:layout_marginEnd="24dp"
             android:background="@drawable/midsize"
-            android:backgroundTint="@color/stroke"
             android:contentDescription="@string/Mid_size"
             app:layout_constraintBottom_toBottomOf="@+id/constraintLayout9"
             app:layout_constraintEnd_toStartOf="@+id/big_cup"
@@ -264,10 +263,12 @@
 
         <ImageButton
             android:id="@+id/small_cup"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_marginEnd="24dp"
-            android:background="@drawable/smallsize"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/midsize"
             android:contentDescription="@string/Small_size"
             android:minWidth="20dp"
             android:minHeight="20dp"
@@ -301,8 +302,7 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginEnd="24dp"
-            android:background="@drawable/threeices"
-            android:backgroundTint="@color/stroke"
+            android:background="@drawable/threeice"
             android:contentDescription="@string/Ice"
             app:layout_constraintBottom_toBottomOf="@+id/constraintLayout10"
             app:layout_constraintEnd_toEndOf="@+id/constraintLayout10"
@@ -314,8 +314,7 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginEnd="24dp"
-            android:background="@drawable/twoices"
-            android:backgroundTint="@color/stroke"
+            android:background="@drawable/twoice"
 
             android:contentDescription="@string/Ice"
             app:layout_constraintBottom_toBottomOf="@+id/constraintLayout10"
@@ -329,7 +328,6 @@
             android:layout_height="40dp"
             android:layout_marginEnd="24dp"
             android:background="@drawable/oneice"
-            android:backgroundTint="@color/stroke"
             android:contentDescription="@string/Ice"
             app:layout_constraintBottom_toBottomOf="@+id/constraintLayout10"
             app:layout_constraintEnd_toStartOf="@+id/two_ice"

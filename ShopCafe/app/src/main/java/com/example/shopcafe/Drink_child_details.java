@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.view.Gravity;
@@ -75,18 +76,19 @@ public class Drink_child_details extends Fragment {
         smallice=view.findViewById(R.id.one_ice);
         sum_money= view.findViewById(R.id.total_amount);
         quanti = view.findViewById(R.id.view_quantity);
+        left_arrow = view.findViewById(R.id.left_arrow);
 
         img_cafe.setImageResource(img1);
         text_drink.setText(name1);
         temp_cal = price1;
-        sum_money.setText(String.valueOf(temp_cal));
+        sum_money.setText("$"+String.valueOf(temp_cal)+".00");
         plus_but.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                quantity++;
+                quantity +=1;
                 quanti.setText(String.valueOf(quantity));
-                temp_cal +=  price1 ;
-                sum_money.setText(String.valueOf(temp_cal));
+                temp_cal = getmoney();
+                sum_money.setText("$"+String.valueOf(temp_cal)+".00");
             }
         });
 
@@ -94,48 +96,210 @@ public class Drink_child_details extends Fragment {
             @Override
             public void onClick(View view) {
             if (quantity > 1) {
-                quantity--;
+                quantity -=1;
                 quanti.setText(String.valueOf(quantity));
-                temp_cal -= price1;
-                sum_money.setText(String.valueOf(temp_cal));
+                temp_cal = getmoney();
+                sum_money.setText("$"+String.valueOf(temp_cal)+".00");
             }
         }});
 
         sin_shot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-            sing_shot = true;
-            doub_shot = false;
-            clickshot();
-            if(size_big)
-            {
-                temp_cal = price1*quantity + size_L;
-            }else if(size_mid){
-                temp_cal = price1*quantity + size_M;
-            }else {
-                temp_cal = price1*quantity;
-            }
-            sum_money.setText(String.valueOf(temp_cal));
+                sing_shot = true;
+                doub_shot = false;
+                clickshot();
+                if(size_big)
+                {
+                    temp_cal = price1*quantity + size_L*quantity;
+                }else if(size_mid){
+                    temp_cal = price1*quantity + size_M*quantity;
+                }else {
+                    temp_cal = price1*quantity;
+                }
+                sum_money.setText("$"+String.valueOf(temp_cal)+".00");
         }});
 
         dou_shot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-            sing_shot = false;
-            doub_shot = true;
-            clickshot();
-            if(size_big)
-            {
-                temp_cal = price1*quantity + size_L;
-            }else if(size_mid){
-                temp_cal = price1*quantity + size_M;
-            }else {
-                temp_cal = price1*quantity;
-            }
-            temp_cal += doub;
-            sum_money.setText(String.valueOf(temp_cal));
+                sing_shot = false;
+                doub_shot = true;
+                clickshot();
+                if(size_big)
+                {
+                    temp_cal = price1*quantity + size_L*quantity;
+                }else if(size_mid){
+                    temp_cal = price1*quantity + size_M*quantity;
+                }else {
+                    temp_cal = price1*quantity;
+                }
+                temp_cal = temp_cal+ doub*quantity;
+                sum_money.setText("$"+String.valueOf(temp_cal)+".00");
         }});
 
+        cup_select.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                select_cup = true;
+                select_bot = false;
+                select_cup_bot();
+        }});
+
+        bottle_select.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                select_cup = false;
+                select_bot = true;
+                select_cup_bot();
+        }});
+
+        bigsize.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                size_big =true;
+                size_mid = false;
+                size_small = false;
+                size_color();
+                if(doub_shot)
+                {
+                    temp_cal = price1*quantity + doub*quantity;
+                }else{
+                    temp_cal = price1*quantity;
+                }
+                temp_cal += size_L*quantity;
+                sum_money.setText("$"+String.valueOf(temp_cal)+".00");
+
+        }});
+
+        midsize.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                size_big = false;
+                size_mid = true;
+                size_small = false;
+                size_color();
+                if(doub_shot)
+                {
+                    temp_cal = price1*quantity + doub*quantity;
+                }else{
+                    temp_cal = price1*quantity;
+                }
+                temp_cal += size_M*quantity;
+                sum_money.setText("$"+String.valueOf(temp_cal)+".00");
+        }});
+
+        smallsize.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                size_big = false;
+                size_mid = false;
+                size_small = true;
+                size_color();
+                if(doub_shot)
+                {
+                    temp_cal = price1*quantity + doub*quantity;
+                }else{
+                    temp_cal = price1*quantity;
+                }
+                sum_money.setText("$"+String.valueOf(temp_cal)+".00");
+        }});
+
+        bigice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ice_3 = true;
+                ice_2 = false;
+                ice_1 = false;
+                ice_color();
+        }});
+
+        midice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ice_3 = false;
+                ice_2 = true;
+                ice_1 = false;
+                ice_color();
+        }});
+
+        smallice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ice_3 = false;
+                ice_2 = false;
+                ice_1 = true;
+                ice_color();
+        }});
+
+        left_arrow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().getSupportFragmentManager().popBackStack();
+            }
+        });
+    }
+
+    private int getmoney() {
+        if(doub_shot && size_big ) return quantity*(price1+doub+size_L);
+        if(doub_shot && size_mid) return quantity*(price1+doub+size_M);
+        if (!doub_shot &&size_big) return  quantity*(price1+size_L);
+        if(!doub_shot && size_mid)return quantity*(price1+size_M);
+        if(doub_shot) return quantity*(price1+doub);
+        return price1*quantity;
+    }
+
+
+
+    @SuppressLint("ResourceAsColor")
+    private void ice_color() {
+        if(ice_3)
+        {
+            bigice.setBackgroundResource(R.drawable.threeice1);
+            smallice.setBackgroundResource(R.drawable.oneice);
+            midice.setBackgroundResource(R.drawable.twoice);
+        }
+        else if(ice_2) {
+            bigice.setBackgroundResource(R.drawable.threeice);
+            smallice.setBackgroundResource(R.drawable.oneice);
+            midice.setBackgroundResource(R.drawable.twoice1);
+        }else{
+            bigice.setBackgroundResource(R.drawable.threeice);
+            smallice.setBackgroundResource(R.drawable.oneice1);
+            midice.setBackgroundResource(R.drawable.twoice);
+        }
+    }
+
+    @SuppressLint("ResourceAsColor")
+    private void size_color() {
+        if(size_big)
+        {
+            bigsize.setBackgroundResource(R.drawable.midsize1);
+            smallsize.setBackgroundResource(R.drawable.midsize);
+            midsize.setBackgroundResource(R.drawable.midsize);
+        }
+        else if(size_mid) {
+            bigsize.setBackgroundResource(R.drawable.midsize);
+            midsize.setBackgroundResource(R.drawable.midsize1);
+            smallsize.setBackgroundResource(R.drawable.midsize);
+
+        }else{
+            bigsize.setBackgroundResource(R.drawable.midsize);
+            midsize.setBackgroundResource(R.drawable.midsize);
+            smallsize.setBackgroundResource(R.drawable.midsize1);
+
+        }
+    }
+
+    @SuppressLint("ResourceAsColor")
+    public void select_cup_bot() {
+        if(select_cup){
+            cup_select.setBackgroundResource(R.drawable.cuptea1);
+            bottle_select.setBackgroundResource(R.drawable.bottle);;
+        }else{
+            cup_select.setBackgroundResource(R.drawable.cuptea);;
+            bottle_select.setBackgroundResource(R.drawable.bottle1);;
+        }
     }
     @SuppressLint("ResourceAsColor")
     public void clickshot() {

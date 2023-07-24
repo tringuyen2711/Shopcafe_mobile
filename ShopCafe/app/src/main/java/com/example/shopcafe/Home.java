@@ -16,16 +16,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.shopcafe.database.userDB;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
 
 public class Home extends Fragment implements DrinkApdapter.OnClickItemListener {
-    TextView greeting_text;
+    TextView greeting_text, uname;
     private RecyclerView revDrink;
     List<Drink> list ;
-
+    private User user1;
     private GridLayoutManager gridLayoutManager;
 
     public Home(){}
@@ -40,6 +42,9 @@ public class Home extends Fragment implements DrinkApdapter.OnClickItemListener 
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         greeting_text = (TextView) getView().findViewById(R.id.greeting);
+        uname = (TextView) getView().findViewById(R.id.name_user);
+        check_insert();
+        uname.setText(user1.getUsername());
         Calendar Kalendar = Calendar.getInstance();
         int hours_divide = Kalendar.get(Calendar.HOUR_OF_DAY);
         if(hours_divide >= 6 && hours_divide <12 )
@@ -62,7 +67,18 @@ public class Home extends Fragment implements DrinkApdapter.OnClickItemListener 
         // Inflate the layout for this fragment
 
     }
-
+    private void check_insert() {
+        user1 = userDB.getInstance(getActivity()).userDAO().getdata();
+        if(user1 == null)
+        {
+            String name = "Anderson";
+            String phone = "+60134589525";
+            String email = "Anderson@gmail.com";
+            String address = "3 Addersion Court\nChino Hills, HO56824, United State";
+            user1 = new User(name,phone,email,address);
+            userDB.getInstance(getContext()).userDAO().insertuser(user1);
+        }
+    }
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,6 +104,7 @@ public class Home extends Fragment implements DrinkApdapter.OnClickItemListener 
 
     @Override
     public void onStart() {
+
         super.onStart();
     }
 

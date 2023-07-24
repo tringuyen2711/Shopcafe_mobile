@@ -1,14 +1,19 @@
 package com.example.shopcafe;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.shopcafe.database.userDB;
+
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
+
     Timer timer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,5 +30,7 @@ public class MainActivity extends AppCompatActivity {
             }
         },2000);
     }
+
+
 
 }
