@@ -12,7 +12,7 @@ public class User {
     private String phone;
     private String email;
 
-    public User(String username, String address, String phone, String email) {
+    public User( String username, String address, String phone, String email) {
         this.username = username;
         this.address = address;
         this.phone = phone;

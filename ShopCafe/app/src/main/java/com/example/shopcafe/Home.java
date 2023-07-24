@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.shopcafe.database.userDB;
@@ -27,9 +28,12 @@ public class Home extends Fragment implements DrinkApdapter.OnClickItemListener 
     TextView greeting_text, uname;
     private RecyclerView revDrink;
     List<Drink> list ;
+
+    ImageButton profile;
     private User user1;
     private GridLayoutManager gridLayoutManager;
-
+    String usname;
+    private int id;
     public Home(){}
 
     public static Home newInstance()
@@ -43,7 +47,10 @@ public class Home extends Fragment implements DrinkApdapter.OnClickItemListener 
         super.onViewCreated(view, savedInstanceState);
         greeting_text = (TextView) getView().findViewById(R.id.greeting);
         uname = (TextView) getView().findViewById(R.id.name_user);
+        profile = (ImageButton) getView().findViewById(R.id.profile);
         check_insert();
+        id = user1.getId();
+        usname = user1.getUsername();
         uname.setText(user1.getUsername());
         Calendar Kalendar = Calendar.getInstance();
         int hours_divide = Kalendar.get(Calendar.HOUR_OF_DAY);
@@ -64,6 +71,15 @@ public class Home extends Fragment implements DrinkApdapter.OnClickItemListener 
 
         DrinkApdapter adapter = new DrinkApdapter(getlistdrink(), this);
         revDrink.setAdapter(adapter);
+
+        profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment frag = Profile_frg.newInstance(usname,id);
+                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.home_frag,frag).addToBackStack(null).commit();
+            }
+        });
         // Inflate the layout for this fragment
 
     }
@@ -74,9 +90,9 @@ public class Home extends Fragment implements DrinkApdapter.OnClickItemListener 
             String name = "Anderson";
             String phone = "+60134589525";
             String email = "Anderson@gmail.com";
-            String address = "3 Addersion Court\nChino Hills, HO56824, United State";
-            user1 = new User(name,phone,email,address);
-            userDB.getInstance(getContext()).userDAO().insertuser(user1);
+            String address = "3 Addersion Court Chino Hills, HO56824, United State";
+            user1 = new User(name,address,phone,email);
+            userDB.getInstance(getActivity()).userDAO().insertuser(user1);
         }
     }
     @Override
