@@ -50,5 +50,9 @@
     <string name="idioms">Your order has been placed successfully. \n For more details, go to my orders.</string>
     <string name="order_success">Order Success</string>
     <string name="track_my_order">Track My Order</string>
+    <string name="my_cart">My Cart</string>
+    <string name="back">Back</string>
+    <string name="total_price">Total Price</string>
+    <string name="bottle">Bottle</string>
 
 </resources>

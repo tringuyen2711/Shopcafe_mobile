@@ -3,6 +3,7 @@ package com.example.shopcafe;
 import static android.widget.Toast.LENGTH_SHORT;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -18,16 +19,18 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.example.shopcafe.database.userDB;
 
 
 public class Drink_child_details extends Fragment {
 
+    //Drinkcast drinkcast;
     //Declaration
     ImageButton bigsize, midsize, smallsize, bigice, midice, smallice,
             bottle_select, cup_select,plus_but, minus_but, left_arrow;
 
-    Button dou_shot, sin_shot ;
+    Button dou_shot, sin_shot, addtocart ;
     ImageView img_cafe;
     TextView quanti, sum_money, text_drink;
     int quantity =1;
@@ -38,7 +41,7 @@ public class Drink_child_details extends Fragment {
     boolean size_big =false, size_mid=false, size_small = false;
     boolean ice_3 = false, ice_2 = false, ice_1= false;
     int temp_cal= 0;
-    String name1;
+    String name1, shot, select, size, ice;
     int price1;
     int img1;
     public Drink_child_details() {
@@ -59,24 +62,8 @@ public class Drink_child_details extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        init(view);
 
-        img_cafe = view.findViewById(R.id.image_Americano);
-        text_drink = view.findViewById(R.id.text_Americano);
-        plus_but = view.findViewById(R.id.plus_button);
-        minus_but = view.findViewById(R.id.minux_button);
-        dou_shot = view.findViewById(R.id.double_shot);
-        sin_shot = view.findViewById(R.id.single_shot);
-        bottle_select= view.findViewById(R.id.bottle);
-        cup_select = view.findViewById(R.id.cuptea);
-        bigsize = view.findViewById(R.id.big_cup);
-        midsize= view.findViewById(R.id.mid_cup);
-        smallsize= view.findViewById(R.id.small_cup);
-        bigice= view.findViewById(R.id.three_ice);
-        midice= view.findViewById(R.id.two_ice);
-        smallice=view.findViewById(R.id.one_ice);
-        sum_money= view.findViewById(R.id.total_amount);
-        quanti = view.findViewById(R.id.view_quantity);
-        left_arrow = view.findViewById(R.id.left_arrow);
 
         img_cafe.setImageResource(img1);
         text_drink.setText(name1);
@@ -106,6 +93,7 @@ public class Drink_child_details extends Fragment {
         sin_shot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                shot = "Single";
                 sing_shot = true;
                 doub_shot = false;
                 clickshot();
@@ -123,6 +111,7 @@ public class Drink_child_details extends Fragment {
         dou_shot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                shot = "Double";
                 sing_shot = false;
                 doub_shot = true;
                 clickshot();
@@ -141,6 +130,7 @@ public class Drink_child_details extends Fragment {
         cup_select.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                select = "hot";
                 select_cup = true;
                 select_bot = false;
                 select_cup_bot();
@@ -149,6 +139,7 @@ public class Drink_child_details extends Fragment {
         bottle_select.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                select = "iced";
                 select_cup = false;
                 select_bot = true;
                 select_cup_bot();
@@ -157,6 +148,7 @@ public class Drink_child_details extends Fragment {
         bigsize.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                size = "big";
                 size_big =true;
                 size_mid = false;
                 size_small = false;
@@ -175,6 +167,7 @@ public class Drink_child_details extends Fragment {
         midsize.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                size = "medium";
                 size_big = false;
                 size_mid = true;
                 size_small = false;
@@ -192,6 +185,7 @@ public class Drink_child_details extends Fragment {
         smallsize.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                size ="small";
                 size_big = false;
                 size_mid = false;
                 size_small = true;
@@ -208,6 +202,7 @@ public class Drink_child_details extends Fragment {
         bigice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                ice = "full ice";
                 ice_3 = true;
                 ice_2 = false;
                 ice_1 = false;
@@ -217,6 +212,7 @@ public class Drink_child_details extends Fragment {
         midice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                ice = "half ice";
                 ice_3 = false;
                 ice_2 = true;
                 ice_1 = false;
@@ -226,6 +222,7 @@ public class Drink_child_details extends Fragment {
         smallice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                ice = "few ice";
                 ice_3 = false;
                 ice_2 = false;
                 ice_1 = true;
@@ -238,6 +235,39 @@ public class Drink_child_details extends Fragment {
                 getActivity().getSupportFragmentManager().popBackStack();
             }
         });
+
+
+        addtocart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                /*drinkcast = new Drinkcast(name1,shot,select,size,ice,quantity,img1,temp_cal);
+                userDB.getInstance(getActivity()).cartDAO().insertCart(drinkcast);
+                Intent intent = new Intent(getActivity(), Checkout.class);
+                startActivity(intent);*/
+            }
+        });
+
+    }
+
+    private void init(View view) {
+        img_cafe = view.findViewById(R.id.image_Americano);
+        text_drink = view.findViewById(R.id.text_Americano);
+        plus_but = view.findViewById(R.id.plus_button);
+        minus_but = view.findViewById(R.id.minux_button);
+        dou_shot = view.findViewById(R.id.double_shot);
+        sin_shot = view.findViewById(R.id.single_shot);
+        bottle_select= view.findViewById(R.id.bottle);
+        cup_select = view.findViewById(R.id.cuptea);
+        bigsize = view.findViewById(R.id.big_cup);
+        midsize= view.findViewById(R.id.mid_cup);
+        smallsize= view.findViewById(R.id.small_cup);
+        bigice= view.findViewById(R.id.three_ice);
+        midice= view.findViewById(R.id.two_ice);
+        smallice=view.findViewById(R.id.one_ice);
+        sum_money= view.findViewById(R.id.total_amount);
+        quanti = view.findViewById(R.id.view_quantity);
+        left_arrow = view.findViewById(R.id.left_arrow);
+        addtocart = view.findViewById(R.id.add_to_cart);
     }
 
     private int getmoney() {
@@ -295,10 +325,10 @@ public class Drink_child_details extends Fragment {
     public void select_cup_bot() {
         if(select_cup){
             cup_select.setBackgroundResource(R.drawable.cuptea1);
-            bottle_select.setBackgroundResource(R.drawable.bottle);;
+            bottle_select.setBackgroundResource(R.drawable.bottle);
         }else{
-            cup_select.setBackgroundResource(R.drawable.cuptea);;
-            bottle_select.setBackgroundResource(R.drawable.bottle1);;
+            cup_select.setBackgroundResource(R.drawable.cuptea);
+            bottle_select.setBackgroundResource(R.drawable.bottle1);
         }
     }
     @SuppressLint("ResourceAsColor")

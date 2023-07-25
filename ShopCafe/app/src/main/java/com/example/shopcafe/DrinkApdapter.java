@@ -100,7 +100,5 @@ public class DrinkApdapter extends RecyclerView.Adapter<DrinkApdapter.DrinkViewH
 
     }
 
-    public interface OnClickItemListener{
-        public void ClickItem(Drink drink_items);
-    }
+
 }
