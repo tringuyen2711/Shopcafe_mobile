@@ -103,7 +103,7 @@
             android:contentDescription="@string/phone_number"/>
 
         <ImageButton
-            android:id="@+id/imageButton2"
+            android:id="@+id/buttonPhone"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_marginEnd="40dp"
@@ -162,7 +162,7 @@
             android:contentDescription="@string/email" />
 
         <ImageButton
-            android:id="@+id/imageButton3"
+            android:id="@+id/buttonEmail"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_marginEnd="40dp"
@@ -218,7 +218,7 @@
             android:contentDescription="@string/address"/>
 
         <ImageButton
-            android:id="@+id/imageButton4"
+            android:id="@+id/buttonAddress"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_marginEnd="40dp"
@@ -261,5 +261,6 @@
         app:layout_constraintEnd_toStartOf="@+id/profile_text"
         app:layout_constraintHorizontal_bias="0.239"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="SpeakableTextPresentCheck" />
 </androidx.constraintlayout.widget.ConstraintLayout>

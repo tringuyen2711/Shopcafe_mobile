@@ -1,5 +1,6 @@
 package com.example.shopcafe;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -9,28 +10,33 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
 import com.example.shopcafe.database.userDB;
 
+import java.io.Serializable;
+
 
 public class Profile_frg extends Fragment {
 
     private EditText e_name, e_phone, e_email, e_address;
     private ImageButton back;
+    private ImageButton bname, bphone, bemail,baddrress;
+    private User u1;
     String nameUser;
+    private String temp_name, temp_phone, temp_email,temp_address;
     int ID;
     public Profile_frg() {
         // Required empty public constructor
     }
 
 
-    public static Profile_frg newInstance(String user_name, int ID) {
+    public static Profile_frg newInstance(User u) {
         Bundle args = new Bundle();
-        args.putString("usname", user_name);
-        args.putInt("ID",ID);
+        args.putSerializable("user", u);
         Profile_frg fragment = new Profile_frg();
         fragment.setArguments(args);
         return fragment;
@@ -40,36 +46,71 @@ public class Profile_frg extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        e_name = view.findViewById(R.id.name_edit);
-        e_phone = view.findViewById(R.id.phone_edit);
-        e_email = view.findViewById(R.id.email_edit);
-        e_address = view.findViewById(R.id.address_edit);
-        back = view.findViewById(R.id.leftarrowProfile);
+        init(view);
 
 
-        User u = userDB.getInstance(getContext()).userDAO().findByName(nameUser);
-        ID = u.getId();
-        e_name.setText(u.getUsername());
-        e_phone.setText(u.getPhone());
-        e_email.setText(u.getEmail());
-        e_address.setText(u.getAddress());
+        e_name.setText(u1.getUsername());
+        e_phone.setText(u1.getPhone());
+        e_email.setText(u1.getEmail());
+        e_address.setText(u1.getAddress());
 
-        String temp_name = e_name.getText().toString();
-        String temp_phone = e_phone.getText().toString();
-        String temp_email = e_email.getText().toString();
-        String temp_address = e_address.getText().toString();
+        bname.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                e_name.setEnabled(true);
+                e_name.requestFocus();
+                e_name.setSelection(e_name.getText().length());
+                showKeyBoard(e_name);
+            }
+        });
 
-        u.setId(ID);
-        u.setUsername(temp_name);
-        u.setAddress(temp_address);
-        u.setPhone(temp_phone);
-        u.setEmail(temp_email);
+        bphone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                e_phone.setEnabled(true);
+                e_phone.requestFocus();
+                e_phone.setSelection(e_phone.getText().length());
+                showKeyBoard(e_name);
+            }
+        });
 
-        userDB.getInstance(getActivity()).userDAO().updateuser(u);
+        bemail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                e_email.setEnabled(true);
+                e_email.requestFocus();
+                e_email.setSelection(e_email.getText().length());
+                showKeyBoard(e_name);
+            }
+        });
+
+        baddrress.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                e_address.setEnabled(true);
+                e_address.requestFocus();
+                e_address.setSelection(e_address.getText().length());
+                showKeyBoard(e_name);
+            }
+        });
+
+         temp_name = e_name.getText().toString();
+         temp_phone = e_phone.getText().toString();
+         temp_email = e_email.getText().toString();
+         temp_address = e_address.getText().toString();
+
+
+        u1.setUsername(temp_name);
+        u1.setAddress(temp_address);
+        u1.setPhone(temp_phone);
+        u1.setEmail(temp_email);
+
+
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                userDB.getInstance(getActivity()).userDAO().updateuser(u1);
                 getActivity().getSupportFragmentManager().popBackStack();
             }
         });
@@ -79,12 +120,35 @@ public class Profile_frg extends Fragment {
 
     }
 
+    private void showKeyBoard(EditText editText) {
+        InputMethodManager imm = (InputMethodManager) this.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT);
+    }
+
+    private void init(View view) {
+        e_name = view.findViewById(R.id.name_edit);
+
+        e_phone = view.findViewById(R.id.phone_edit);
+
+        e_email = view.findViewById(R.id.email_edit);
+        e_address = view.findViewById(R.id.address_edit);
+        back = view.findViewById(R.id.leftarrowProfile);
+        bname = view.findViewById(R.id.buttonName);
+        bphone = view.findViewById(R.id.buttonPhone);
+        bemail=view.findViewById(R.id.buttonEmail);
+        baddrress = view.findViewById(R.id.buttonAddress);
+
+        e_name.setEnabled(false);
+        e_phone.setEnabled(false);
+        e_email.setEnabled(false);
+        e_address.setEnabled(false);
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if(getArguments()!= null){
-            nameUser = getArguments().getString("usname");
-            ID = getArguments().getInt("ID");
+            u1 = (User) getArguments().getSerializable("user");
         }
     }
 
