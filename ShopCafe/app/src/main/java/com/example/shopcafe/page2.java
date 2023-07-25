@@ -26,50 +26,7 @@ import java.util.List;
 
 public class page2 extends AppCompatActivity {
 
-    /*TextView greeting_text;
-    private RecyclerView revDrink;
-    private GridLayoutManager gridLayoutManager;
-    @SuppressLint("SetTextI18n")
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.page2);
 
-        // set greeting based on current time
-        greeting_text = (TextView)findViewById(R.id.greeting);
-        Calendar Kalendar = Calendar.getInstance();
-        int hours_divide = Kalendar.get(Calendar.HOUR_OF_DAY);
-        if(hours_divide >= 6 && hours_divide <12 )
-        {
-            greeting_text.setText("Good Morning");
-        } else if (hours_divide >=12 && hours_divide <18) {
-            greeting_text.setText("Good Afternoon");
-        }else if (hours_divide >=18 && hours_divide <22) {
-            greeting_text.setText("Good Evening");
-        }else {
-            greeting_text.setText("Good Night");
-        }
-
-        revDrink = findViewById(R.id.recyclerDrink);
-        gridLayoutManager = new GridLayoutManager(this,2);
-        revDrink.setLayoutManager(gridLayoutManager);
-
-        DrinkApdapter adapter = new DrinkApdapter(getlistdrink());
-        revDrink.setAdapter(adapter);
-    }
-
-    private List<Drink> getlistdrink() {
-        List<Drink> list = new ArrayList<>();
-        list.add(new Drink(R.drawable.cafe,"Cafe",Drink.TYPE_DRINK));
-        list.add(new Drink(R.drawable.capuchino,"Capuchino",Drink.TYPE_DRINK));
-        list.add(new Drink(R.drawable.mocha,"Mocha",Drink.TYPE_DRINK));
-        list.add(new Drink(R.drawable.flatwhite,"Flat White",Drink.TYPE_DRINK));
-        list.add(new Drink(R.drawable.flatwhite,"Flat White",Drink.TYPE_DRINK));
-        list.add(new Drink(R.drawable.flatwhite,"Flat White",Drink.TYPE_DRINK));
-        return list;
-    }*/
-
-    //private ViewPager mViewPaper;
     private BottomNavigationView mBottomNavigationView;
     private Home Homefragent = new Home();
     gift Gift = new gift();
@@ -90,16 +47,16 @@ public class page2 extends AppCompatActivity {
                 int itemId = item.getItemId();
                 if (itemId == R.id.home) {
 
-                    getSupportFragmentManager().beginTransaction().replace(R.id.full_paper, Homefragent).addToBackStack(null).commit();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.full_paper, Homefragent).commit();
                     return true;
                 } else if (itemId == R.id.gift) {
-                    getSupportFragmentManager().beginTransaction().replace(R.id.full_paper, Gift).addToBackStack(null).commit();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.full_paper, Gift).commit();
                     return true;
                 } else if (itemId == R.id.order) {
-                    getSupportFragmentManager().beginTransaction().replace(R.id.full_paper, Order).addToBackStack(null).commit();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.full_paper, Order).commit();
                     return true;
                 } else{
-                getSupportFragmentManager().beginTransaction().replace(R.id.full_paper, Homefragent).addToBackStack(null).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.full_paper, Homefragent).commit();
                 return true;
                 }
             }

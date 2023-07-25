@@ -1,14 +1,12 @@
 package com.example.shopcafe;
 
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.shopcafe.database.userDB;
+import com.example.shopcafe.database.APPDatabase;
 
-import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 

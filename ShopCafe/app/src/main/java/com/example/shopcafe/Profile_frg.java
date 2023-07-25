@@ -11,13 +11,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
-import com.example.shopcafe.database.userDB;
-
-import java.io.Serializable;
+import com.example.shopcafe.database.APPDatabase;
 
 
 public class Profile_frg extends Fragment {
@@ -110,7 +107,7 @@ public class Profile_frg extends Fragment {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                userDB.getInstance(getActivity()).userDAO().updateuser(u1);
+                APPDatabase.getInstance(getActivity()).userDAO().updateuser(u1);
                 getActivity().getSupportFragmentManager().popBackStack();
             }
         });

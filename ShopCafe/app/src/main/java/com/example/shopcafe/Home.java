@@ -1,11 +1,9 @@
 package com.example.shopcafe;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -17,7 +15,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.example.shopcafe.database.userDB;
+import com.example.shopcafe.database.APPDatabase;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -86,7 +84,7 @@ public class Home extends Fragment implements DrinkApdapter.OnClickItemListener 
 
     }
     private void check_insert() {
-        user1 = userDB.getInstance(getActivity()).userDAO().getdata();
+        user1 = APPDatabase.getInstance(getActivity()).userDAO().getdata();
         if(user1 == null)
         {
             String name = "Anderson";
@@ -94,7 +92,7 @@ public class Home extends Fragment implements DrinkApdapter.OnClickItemListener 
             String email = "Anderson@gmail.com";
             String address = "3 Addersion Court Chino Hills, HO56824, United State";
             user1 = new User(name,address,phone,email);
-            userDB.getInstance(getActivity()).userDAO().insertuser(user1);
+            APPDatabase.getInstance(getActivity()).userDAO().insertuser(user1);
         }
     }
     @Override

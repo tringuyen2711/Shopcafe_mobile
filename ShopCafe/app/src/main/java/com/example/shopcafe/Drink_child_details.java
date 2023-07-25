@@ -3,6 +3,7 @@ package com.example.shopcafe;
 import static android.widget.Toast.LENGTH_SHORT;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -20,14 +21,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.shopcafe.database.APPDatabase;
+
 
 public class Drink_child_details extends Fragment {
 
     //Declaration
     ImageButton bigsize, midsize, smallsize, bigice, midice, smallice,
             bottle_select, cup_select,plus_but, minus_but, left_arrow;
-
-    Button dou_shot, sin_shot ;
+    DrinkCart drinkCart;
+    Button dou_shot, sin_shot,addtocart ;
     ImageView img_cafe;
     TextView quanti, sum_money, text_drink;
     int quantity =1;
@@ -38,7 +41,7 @@ public class Drink_child_details extends Fragment {
     boolean size_big =false, size_mid=false, size_small = false;
     boolean ice_3 = false, ice_2 = false, ice_1= false;
     int temp_cal= 0;
-    String name1;
+    String name1, shot="", select="", size="", ice="";
     int price1;
     int img1;
     public Drink_child_details() {
@@ -77,6 +80,7 @@ public class Drink_child_details extends Fragment {
         sum_money= view.findViewById(R.id.total_amount);
         quanti = view.findViewById(R.id.view_quantity);
         left_arrow = view.findViewById(R.id.left_arrow);
+        addtocart = view.findViewById(R.id.add_to_cart);
 
         img_cafe.setImageResource(img1);
         text_drink.setText(name1);
@@ -106,6 +110,7 @@ public class Drink_child_details extends Fragment {
         sin_shot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                shot = "Single";
                 sing_shot = true;
                 doub_shot = false;
                 clickshot();
@@ -123,6 +128,7 @@ public class Drink_child_details extends Fragment {
         dou_shot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                shot = "Double";
                 sing_shot = false;
                 doub_shot = true;
                 clickshot();
@@ -141,6 +147,7 @@ public class Drink_child_details extends Fragment {
         cup_select.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                select="hot";
                 select_cup = true;
                 select_bot = false;
                 select_cup_bot();
@@ -149,6 +156,7 @@ public class Drink_child_details extends Fragment {
         bottle_select.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                select ="iced";
                 select_cup = false;
                 select_bot = true;
                 select_cup_bot();
@@ -157,6 +165,7 @@ public class Drink_child_details extends Fragment {
         bigsize.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                size ="big";
                 size_big =true;
                 size_mid = false;
                 size_small = false;
@@ -175,6 +184,7 @@ public class Drink_child_details extends Fragment {
         midsize.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                size ="medium";
                 size_big = false;
                 size_mid = true;
                 size_small = false;
@@ -192,6 +202,7 @@ public class Drink_child_details extends Fragment {
         smallsize.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                size ="small";
                 size_big = false;
                 size_mid = false;
                 size_small = true;
@@ -208,6 +219,7 @@ public class Drink_child_details extends Fragment {
         bigice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                ice = "full ice";
                 ice_3 = true;
                 ice_2 = false;
                 ice_1 = false;
@@ -217,6 +229,7 @@ public class Drink_child_details extends Fragment {
         midice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                ice ="half ice";
                 ice_3 = false;
                 ice_2 = true;
                 ice_1 = false;
@@ -226,6 +239,7 @@ public class Drink_child_details extends Fragment {
         smallice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                ice = "few ice";
                 ice_3 = false;
                 ice_2 = false;
                 ice_1 = true;
@@ -236,6 +250,16 @@ public class Drink_child_details extends Fragment {
             @Override
             public void onClick(View view) {
                 getActivity().getSupportFragmentManager().popBackStack();
+            }
+        });
+
+        addtocart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                drinkCart = new DrinkCart(name1,shot,select,size,ice,quantity,img1,temp_cal);
+                APPDatabase.getInstance(getActivity()).drinkcartDAO().insertCart(drinkCart);
+                Intent intent = new Intent(getActivity(), Checkout.class);
+                startActivity(intent);
             }
         });
     }

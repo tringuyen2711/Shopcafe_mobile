@@ -6,6 +6,7 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
+import com.example.shopcafe.DrinkCart;
 import com.example.shopcafe.User;
 
 import java.util.List;
@@ -31,5 +32,5 @@ public interface userDAO {
     @Query("Delete from user")
     void deletetable();
 
-
 }
+
