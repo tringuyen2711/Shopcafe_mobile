@@ -341,6 +341,7 @@
         android:layout_height="54dp"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
+        android:layout_marginBottom="80dp"
         android:background="@drawable/shape_gradient"
         android:backgroundTint="@color/shape_gradient"
         android:text="@string/Add_to_Cart"
