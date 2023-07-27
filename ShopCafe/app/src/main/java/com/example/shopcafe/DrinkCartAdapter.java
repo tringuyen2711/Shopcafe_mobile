@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -15,14 +16,17 @@ import java.util.List;
 public class DrinkCartAdapter extends RecyclerView.Adapter<DrinkCartAdapter.CastViewHolder> {
 
     private List<DrinkCart> LiDrinkCart;
-    public void setData(List<DrinkCart> list)
+    private OnClickCartListener onClickCartListener;
+    public void setData(List<DrinkCart> list )
     {
         this.LiDrinkCart = list;
+
         notifyDataSetChanged();
     }
 
-    public DrinkCartAdapter() {
-
+    public DrinkCartAdapter(List<DrinkCart> list,OnClickCartListener onClickCartListener) {
+        this.onClickCartListener = onClickCartListener;
+        this.LiDrinkCart=list;
     }
 
     @NonNull
@@ -45,6 +49,14 @@ public class DrinkCartAdapter extends RecyclerView.Adapter<DrinkCartAdapter.Cast
         holder.dmoney.setText(String.valueOf(drinkcart.getTotal()));
         holder.dquantity.setText("x"+ drinkcart.getQuantity());
         holder.img.setImageResource(drinkcart.getImg());
+
+        /*holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onClickCartListener.onCartItem(drinkcart);
+            }
+        });*/
+
     }
 
     @Override
@@ -68,5 +80,9 @@ public class DrinkCartAdapter extends RecyclerView.Adapter<DrinkCartAdapter.Cast
 
 
         }
+    }
+
+    public interface OnClickCartListener {
+        public void onCartItem(DrinkCart drinkCart);
     }
 }

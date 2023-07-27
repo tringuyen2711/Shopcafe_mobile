@@ -1,6 +1,8 @@
 package com.example.shopcafe.database;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
+import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 
@@ -23,4 +25,10 @@ public interface drinkcartDAO {
 
     @Query("delete from drinkcart where name = :detailsname")
     void deleteItemCart(String detailsname);
+
+    @Query("select * from drinkcart")
+    LiveData<List<DrinkCart>> getLiveDTcart();
+
+    @Delete
+    void DeleteDrinkCart(DrinkCart drinkCart);
 }
