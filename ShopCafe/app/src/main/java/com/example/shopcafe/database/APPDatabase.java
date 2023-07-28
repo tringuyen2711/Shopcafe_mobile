@@ -11,9 +11,10 @@ import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteOpenHelper;
 
 import com.example.shopcafe.DrinkCart;
+import com.example.shopcafe.OrderItem;
 import com.example.shopcafe.User;
 
-@Database(entities = {User.class, DrinkCart.class},version = 1)
+@Database(entities = {User.class, DrinkCart.class, OrderItem.class},version = 2)
 public abstract class APPDatabase extends RoomDatabase {
     private static volatile APPDatabase INSTANCE;
 
@@ -29,4 +30,6 @@ public abstract class APPDatabase extends RoomDatabase {
 
     public abstract userDAO userDAO();
     public abstract drinkcartDAO drinkcartDAO();
+
+    public abstract orderitemDAO orderitemDAO();
 }

@@ -20,6 +20,8 @@ import android.widget.Toast;
 
 import com.example.shopcafe.database.APPDatabase;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,6 +34,9 @@ public class Checkout extends AppCompatActivity implements DrinkCartAdapter.OnCl
     CartViewModel cartViewModel;
     DrinkCartAdapter drinkCartAdapter;
 
+    User user;
+    int money =0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +46,7 @@ public class Checkout extends AppCompatActivity implements DrinkCartAdapter.OnCl
         total_money = findViewById(R.id.money_view);
         check_out = findViewById(R.id.checkout);
         revCart = findViewById(R.id.recyclerViewCart);
-
+        user = APPDatabase.getInstance(Checkout.this).userDAO().getdata();
 //        list = new ArrayList<>();
 //        //list =APPDatabase.getInstance(this).drinkcartDAO().getListCart();
 
@@ -57,8 +62,15 @@ public class Checkout extends AppCompatActivity implements DrinkCartAdapter.OnCl
                 drinkCartAdapter = new DrinkCartAdapter(list,Checkout.this);
                 drinkCartAdapter.setData(list);
                 revCart.setAdapter(drinkCartAdapter);
+                money =0;
+                for(int i =0 ; i<list.size(); ++i)
+                {
+                    money+= list.get(i).getTotal();
+                }
+                total_money.setText("$"+String.valueOf(money));
             }
         });
+
 
 
         goback.setOnClickListener(new View.OnClickListener() {
@@ -71,7 +83,23 @@ public class Checkout extends AppCompatActivity implements DrinkCartAdapter.OnCl
         check_out.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                for(int i =0; i<list.size();++i)
+                {
+                    String name = list.get(i).getName();
+                    String price = String.valueOf(list.get(i).getTotal());
+                    String address = user.getAddress();
+                    int state = 1;
+                    // get current time, format: 24 June | 12:30 PM
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMMM | hh:mm a");
+                    LocalDateTime now = LocalDateTime.now();
+                    String formattedDate = now.format(formatter);
 
+                    // insert into database
+                    OrderItem item = new OrderItem(formattedDate,name,address,state,price);
+                    APPDatabase.getInstance(Checkout.this).orderitemDAO().insertOrder(item);
+                }
+
+                cartViewModel.deleteAll();
                 trackorder temp = new trackorder();
                 getSupportFragmentManager().beginTransaction().replace(R.id.checkoutlayout,temp).commit();
             }

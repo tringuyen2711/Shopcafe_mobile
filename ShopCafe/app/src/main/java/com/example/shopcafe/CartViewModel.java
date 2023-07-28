@@ -29,4 +29,10 @@ public class CartViewModel extends AndroidViewModel {
         return appDatabase.drinkcartDAO().getLiveDTcart();
     }
 
+    public LiveData<List<DrinkCart>> deleteAll()
+    {
+        appDatabase.drinkcartDAO().deleteCart();
+        return appDatabase.drinkcartDAO().getLiveDTcart();
+    }
+
 }

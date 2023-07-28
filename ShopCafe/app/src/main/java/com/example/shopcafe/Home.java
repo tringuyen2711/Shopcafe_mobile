@@ -1,5 +1,6 @@
 package com.example.shopcafe;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -27,7 +28,7 @@ public class Home extends Fragment implements DrinkApdapter.OnClickItemListener 
     private RecyclerView revDrink;
     List<Drink> list ;
 
-    ImageButton profile;
+    ImageButton profile, cart;
     private User user1;
     private GridLayoutManager gridLayoutManager;
     String usname;
@@ -48,6 +49,7 @@ public class Home extends Fragment implements DrinkApdapter.OnClickItemListener 
         greeting_text = (TextView) getView().findViewById(R.id.greeting);
         uname = (TextView) getView().findViewById(R.id.name_user);
         profile = (ImageButton) getView().findViewById(R.id.profile);
+        cart = getView().findViewById(R.id.buy);
         check_insert();
         id = user1.getId();
         usname = user1.getUsername();
@@ -77,7 +79,15 @@ public class Home extends Fragment implements DrinkApdapter.OnClickItemListener 
             public void onClick(View view) {
                 Fragment frag = Profile_frg.newInstance(user1);
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                transaction.replace(R.id.home_frag,frag).addToBackStack(null).commit();
+                transaction.replace(R.id.home_frag,frag).addToBackStack("profile").commit();
+            }
+        });
+
+        cart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), Checkout.class);
+                startActivity(intent);
             }
         });
         // Inflate the layout for this fragment
@@ -129,6 +139,6 @@ public class Home extends Fragment implements DrinkApdapter.OnClickItemListener 
         Fragment fragment = Drink_child_details.newInstance(drink_items.getName(), drink_items.getImage(),
                 drink_items.getPrice());
         FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.home_frag,fragment).addToBackStack(null).commit();
+        transaction.replace(R.id.home_frag,fragment).addToBackStack("details").commit();
     }
 }
