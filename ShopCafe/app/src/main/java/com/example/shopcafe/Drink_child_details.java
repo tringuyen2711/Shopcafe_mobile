@@ -28,7 +28,7 @@ public class Drink_child_details extends Fragment {
 
     //Declaration
     ImageButton bigsize, midsize, smallsize, bigice, midice, smallice,
-            bottle_select, cup_select,plus_but, minus_but, left_arrow;
+            bottle_select, cup_select,plus_but, minus_but, left_arrow, cart;
     DrinkCart drinkCart;
     Button dou_shot, sin_shot,addtocart ;
     ImageView img_cafe;
@@ -63,29 +63,15 @@ public class Drink_child_details extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        img_cafe = view.findViewById(R.id.image_Americano);
-        text_drink = view.findViewById(R.id.text_Americano);
-        plus_but = view.findViewById(R.id.plus_button);
-        minus_but = view.findViewById(R.id.minux_button);
-        dou_shot = view.findViewById(R.id.double_shot);
-        sin_shot = view.findViewById(R.id.single_shot);
-        bottle_select= view.findViewById(R.id.bottle);
-        cup_select = view.findViewById(R.id.cuptea);
-        bigsize = view.findViewById(R.id.big_cup);
-        midsize= view.findViewById(R.id.mid_cup);
-        smallsize= view.findViewById(R.id.small_cup);
-        bigice= view.findViewById(R.id.three_ice);
-        midice= view.findViewById(R.id.two_ice);
-        smallice=view.findViewById(R.id.one_ice);
-        sum_money= view.findViewById(R.id.total_amount);
-        quanti = view.findViewById(R.id.view_quantity);
-        left_arrow = view.findViewById(R.id.left_arrow);
-        addtocart = view.findViewById(R.id.add_to_cart);
+        init(view);
+
+
 
         img_cafe.setImageResource(img1);
         text_drink.setText(name1);
         temp_cal = price1;
         sum_money.setText("$"+String.valueOf(temp_cal)+".00");
+
         plus_but.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -262,6 +248,36 @@ public class Drink_child_details extends Fragment {
                 startActivity(intent);
             }
         });
+
+        cart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), Checkout.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    private void init(View view) {
+        img_cafe = view.findViewById(R.id.image_Americano);
+        text_drink = view.findViewById(R.id.text_Americano);
+        plus_but = view.findViewById(R.id.plus_button);
+        minus_but = view.findViewById(R.id.minux_button);
+        dou_shot = view.findViewById(R.id.double_shot);
+        sin_shot = view.findViewById(R.id.single_shot);
+        bottle_select= view.findViewById(R.id.bottle);
+        cup_select = view.findViewById(R.id.cuptea);
+        bigsize = view.findViewById(R.id.big_cup);
+        midsize= view.findViewById(R.id.mid_cup);
+        smallsize= view.findViewById(R.id.small_cup);
+        bigice= view.findViewById(R.id.three_ice);
+        midice= view.findViewById(R.id.two_ice);
+        smallice=view.findViewById(R.id.one_ice);
+        sum_money= view.findViewById(R.id.total_amount);
+        quanti = view.findViewById(R.id.view_quantity);
+        left_arrow = view.findViewById(R.id.left_arrow);
+        addtocart = view.findViewById(R.id.add_to_cart);
+        cart = view.findViewById(R.id.buy_details);
     }
 
     private int getmoney() {

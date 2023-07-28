@@ -89,13 +89,14 @@ public class Checkout extends AppCompatActivity implements DrinkCartAdapter.OnCl
                     String price = String.valueOf(list.get(i).getTotal());
                     String address = user.getAddress();
                     int state = 1;
+                    int quantity = list.get(i).getQuantity();
                     // get current time, format: 24 June | 12:30 PM
                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMMM | hh:mm a");
                     LocalDateTime now = LocalDateTime.now();
                     String formattedDate = now.format(formatter);
 
                     // insert into database
-                    OrderItem item = new OrderItem(formattedDate,name,address,state,price);
+                    OrderItem item = new OrderItem(formattedDate,name,address,state,price, quantity);
                     APPDatabase.getInstance(Checkout.this).orderitemDAO().insertOrder(item);
                 }
 

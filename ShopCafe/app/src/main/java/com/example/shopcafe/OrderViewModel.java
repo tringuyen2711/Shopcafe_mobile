@@ -43,4 +43,9 @@ public class OrderViewModel extends AndroidViewModel {
     public LiveData<List<OrderItem>> getHistory(){
         return appDatabaseorder.orderitemDAO().getHistoryOrder();
     }
+
+    public int SumOfQuantity()
+    {
+        return appDatabaseorder.orderitemDAO().SumQuantity();
+    }
 }

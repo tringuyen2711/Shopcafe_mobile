@@ -36,4 +36,7 @@ public interface orderitemDAO {
 
     @Update
     void updateOrder(OrderItem orderItem);
+
+    @Query("select sum(quantity) from orderitem")
+    int SumQuantity();
 }

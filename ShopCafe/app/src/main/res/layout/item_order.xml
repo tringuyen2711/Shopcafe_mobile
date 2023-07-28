@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/order_card"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp"
+    android:background="@drawable/shape_gradient">
 
 
     <LinearLayout
@@ -26,27 +28,29 @@
                 <TextView
                     android:id="@+id/date_order"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
+                    android:layout_height="match_parent"
                     android:text="TextView"
                     android:gravity="center_vertical"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:layout_marginTop="5dp">
 
                     <ImageView
                         android:id="@+id/imageView6"
-                        android:layout_width="40dp"
+                        android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
+                        android:layout_weight="4"
                         app:srcCompat="@drawable/midsize"
                        />
 
                     <TextView
                         android:id="@+id/name_order"
-                        android:layout_width="211dp"
-                        android:layout_height="40dp"
+                        android:layout_width="258dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
                         android:gravity="center_vertical"
                         android:text="TextView" />
                 </LinearLayout>
@@ -55,13 +59,13 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/money_order"
                     android:layout_width="match_parent"
-                    android:layout_height="80dp"
+                    android:layout_height="match_parent"
                     android:text="TextView"
                     android:gravity="center"/>
             </LinearLayout>
@@ -70,22 +74,22 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp">
 
             <ImageView
                 android:id="@+id/imageView7"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="0.2"
+                android:layout_weight="7"
                 app:srcCompat="@drawable/location" />
 
             <TextView
                 android:id="@+id/address_order"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginEnd="10dp"
-                android:layout_weight="0.8"
+                android:layout_height="match_parent"
+
+                android:layout_weight="1"
                 android:gravity="center_vertical"
                 android:text="TextView" />
         </LinearLayout>

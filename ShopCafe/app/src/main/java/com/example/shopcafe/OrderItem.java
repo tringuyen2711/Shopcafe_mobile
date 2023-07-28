@@ -16,7 +16,7 @@ public class OrderItem {
 
     private int state;
 
-
+    private int quantity;
 
     public String price;
 
@@ -28,16 +28,25 @@ public class OrderItem {
         return price;
     }
 
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
     public void setPrice(String price) {
         this.price = price;
     }
 
-    public OrderItem(String date, String name, String address, int state, String price) {
+    public OrderItem(String date, String name, String address, int state, String price, int quantity) {
         this.date = date;
         this.name = name;
         this.address = address;
         this.state = state;
         this.price = price;
+        this.quantity = quantity;
     }
 
     public void setState(int state) {
