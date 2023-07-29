@@ -8,6 +8,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,11 +33,8 @@ public class Profile_frg extends Fragment {
     }
 
 
-    public static Profile_frg newInstance(User u) {
-        Bundle args = new Bundle();
-        args.putSerializable("user", u);
+    public static Profile_frg newInstance() {
         Profile_frg fragment = new Profile_frg();
-        fragment.setArguments(args);
         return fragment;
     }
 
@@ -59,6 +57,20 @@ public class Profile_frg extends Fragment {
                 e_name.requestFocus();
                 e_name.setSelection(e_name.getText().length());
                 showKeyBoard(e_name);
+                e_name.setOnKeyListener(new View.OnKeyListener() {
+                    @Override
+                    public boolean onKey(View view, int i, KeyEvent keyEvent) {
+                        if (i == KeyEvent.KEYCODE_ENTER) {
+                            e_name.setEnabled(false);
+                            temp_name = e_name.getText().toString();
+                            u1.setUsername(temp_name);
+                            hideSoftKeyboard(e_name);
+                            return true;
+                        }
+                        return false;
+                    }
+                });
+
             }
         });
 
@@ -68,7 +80,20 @@ public class Profile_frg extends Fragment {
                 e_phone.setEnabled(true);
                 e_phone.requestFocus();
                 e_phone.setSelection(e_phone.getText().length());
-                showKeyBoard(e_name);
+                showKeyBoard(e_phone);
+                e_phone.setOnKeyListener(new View.OnKeyListener() {
+                    @Override
+                    public boolean onKey(View view, int i, KeyEvent keyEvent) {
+                        if (i == KeyEvent.KEYCODE_ENTER) {
+                            e_phone.setEnabled(false);
+                            temp_phone = e_phone.getText().toString();
+                            u1.setEmail(temp_phone);
+                            hideSoftKeyboard(e_phone);
+                            return true;
+                        }
+                        return false;
+                    }
+                });
             }
         });
 
@@ -78,7 +103,21 @@ public class Profile_frg extends Fragment {
                 e_email.setEnabled(true);
                 e_email.requestFocus();
                 e_email.setSelection(e_email.getText().length());
-                showKeyBoard(e_name);
+                showKeyBoard(e_email);
+                e_email.setOnKeyListener(new View.OnKeyListener() {
+                    @Override
+                    public boolean onKey(View view, int i, KeyEvent keyEvent) {
+                        if (i == KeyEvent.KEYCODE_ENTER) {
+                            e_email.setEnabled(false);
+                            temp_email = e_email.getText().toString();
+                            u1.setEmail(temp_email);
+                            hideSoftKeyboard(e_email);
+                            return true;
+                        }
+                        return false;
+                    }
+                });
+
             }
         });
 
@@ -88,27 +127,37 @@ public class Profile_frg extends Fragment {
                 e_address.setEnabled(true);
                 e_address.requestFocus();
                 e_address.setSelection(e_address.getText().length());
-                showKeyBoard(e_name);
+                showKeyBoard(e_address);
+                e_address.setOnKeyListener(new View.OnKeyListener() {
+                    @Override
+                    public boolean onKey(View view, int i, KeyEvent keyEvent) {
+                        if (i == KeyEvent.KEYCODE_ENTER) {
+                            e_address.setEnabled(false);
+                            temp_address = e_address.getText().toString();
+                            u1.setEmail(temp_address);
+                            hideSoftKeyboard(e_address);
+                            return true;
+                        }
+                        return false;
+                    }
+                });
+
             }
         });
 
-         temp_name = e_name.getText().toString();
-         temp_phone = e_phone.getText().toString();
-         temp_email = e_email.getText().toString();
-         temp_address = e_address.getText().toString();
-
-
-        u1.setUsername(temp_name);
-        u1.setAddress(temp_address);
-        u1.setPhone(temp_phone);
-        u1.setEmail(temp_email);
 
 
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                APPDatabase.getInstance(getActivity()).userDAO().updateuser(u1);
+                new Thread(()->{
+                    APPDatabase.getInstance(getActivity()).userDAO().updateuser(u1);
+                }).start();
+                hideSoftKeyboard(e_name);
+                hideSoftKeyboard(e_address);
+                hideSoftKeyboard(e_email);
+                hideSoftKeyboard(e_phone);
                 getActivity().getSupportFragmentManager().popBackStack("profile", FragmentManager.POP_BACK_STACK_INCLUSIVE);
             }
         });
@@ -121,6 +170,11 @@ public class Profile_frg extends Fragment {
     private void showKeyBoard(EditText editText) {
         InputMethodManager imm = (InputMethodManager) this.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT);
+    }
+
+    private void hideSoftKeyboard(EditText editText) {
+        InputMethodManager imm = (InputMethodManager) this.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(editText.getWindowToken(), 0);
     }
 
     private void init(View view) {
@@ -140,15 +194,16 @@ public class Profile_frg extends Fragment {
         e_phone.setEnabled(false);
         e_email.setEnabled(false);
         e_address.setEnabled(false);
+
+        u1 = APPDatabase.getInstance(getContext()).userDAO().getdata();
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if(getArguments()!= null){
-            u1 = (User) getArguments().getSerializable("user");
-        }
+
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
