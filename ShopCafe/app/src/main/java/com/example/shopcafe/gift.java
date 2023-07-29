@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -28,7 +29,7 @@ public class gift extends Fragment {
     private List<Integer> listint;
     TextView points, Ndrink;
 
-    RecyclerView revrewards, revLoyalty;
+    RecyclerView revrewards;
     RewardsAdapter rewardsAdapter;
     OrderViewModel orderViewModel;
     int sumChangePoints, quantity, point, current_point;
@@ -46,7 +47,6 @@ public class gift extends Fragment {
         points.setText(String.valueOf(current_point));
         redeem = view.findViewById(R.id.reddem_drinks);
         Ndrink = view.findViewById(R.id.ndrink);
-        revLoyalty = view.findViewById(R.id.recycler_loyaltycard_rewards);
         revrewards = view.findViewById(R.id.recylerRewards);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
@@ -64,6 +64,7 @@ public class gift extends Fragment {
 
 
 
+
         redeem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -77,10 +78,6 @@ public class gift extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        quantity = APPDatabase.getInstance(getContext()).orderitemDAO().SumQuantity();
-        point = quantity*12;
-        sumChangePoints =APPDatabase.getInstance(getContext()).redeemDrinkDAO().getSumPoint();
-        current_point = point - sumChangePoints;
     }
 
     public static gift newInstance() {
@@ -91,20 +88,13 @@ public class gift extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        quantity = APPDatabase.getInstance(getContext()).orderitemDAO().SumQuantity();
-        point = quantity*12;
-        sumChangePoints =APPDatabase.getInstance(getContext()).redeemDrinkDAO().getSumPoint();
-        current_point = point - sumChangePoints;
-
+        LoyaltyCard loyaltyCard = new LoyaltyCard();
+        requireActivity().getSupportFragmentManager().beginTransaction().add(R.id.constraintLayout3,loyaltyCard).commit();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        quantity = APPDatabase.getInstance(getContext()).orderitemDAO().SumQuantity();
-        point = quantity*12;
-        sumChangePoints =APPDatabase.getInstance(getContext()).redeemDrinkDAO().getSumPoint();
-        current_point = point - sumChangePoints;
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_gift, container, false);
     }
@@ -122,10 +112,5 @@ public class gift extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-        quantity = APPDatabase.getInstance(getContext()).orderitemDAO().SumQuantity();
-        point = quantity*12;
-        sumChangePoints =APPDatabase.getInstance(getContext()).redeemDrinkDAO().getSumPoint();
-        current_point = point - sumChangePoints;
-        points.setText(String.valueOf(current_point));
     }
 }

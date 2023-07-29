@@ -18,6 +18,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,7 +52,6 @@ public class order extends Fragment implements orderAdapter.OnClickOrderListener
         ongoing = view.findViewById(R.id.ongoing);
         history = view.findViewById(R.id.history);
         revOrder = view.findViewById(R.id.recyclerOrder);
-
 
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
@@ -135,6 +136,11 @@ public class order extends Fragment implements orderAdapter.OnClickOrderListener
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        BottomNavigationView bt = requireActivity().findViewById(R.id.bottomNavigationView);
+        if (bt != null && isAdded()) {
+
+            bt.setVisibility(View.VISIBLE);
+        }
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_order, container, false);
     }

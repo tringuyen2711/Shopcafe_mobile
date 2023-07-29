@@ -1,5 +1,6 @@
 package com.example.shopcafe;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -50,10 +51,10 @@ public class Home extends Fragment implements DrinkApdapter.OnClickItemListener 
         uname = (TextView) getView().findViewById(R.id.name_user);
         profile = (ImageButton) getView().findViewById(R.id.profile);
         cart = getView().findViewById(R.id.buy);
+
         check_insert();
-        id = user1.getId();
-        usname = user1.getUsername();
-        uname.setText(user1.getUsername());
+        uname.setText(APPDatabase.getInstance(getContext()).userDAO().getdata().getUsername());
+
         Calendar Kalendar = Calendar.getInstance();
         int hours_divide = Kalendar.get(Calendar.HOUR_OF_DAY);
         if(hours_divide >= 6 && hours_divide <12 )
@@ -77,9 +78,11 @@ public class Home extends Fragment implements DrinkApdapter.OnClickItemListener 
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Fragment frag = Profile_frg.newInstance(user1);
+                /*Fragment frag = Profile_frg.newInstance();
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                transaction.replace(R.id.home_frag,frag).addToBackStack("profile").commit();
+                transaction.replace(R.id.home_frag,frag).addToBackStack("profile").commit();*/
+                Intent intent = new Intent(getActivity(), ProFile.class);
+                startActivity(intent);
             }
         });
 
@@ -94,8 +97,7 @@ public class Home extends Fragment implements DrinkApdapter.OnClickItemListener 
 
     }
     private void check_insert() {
-        user1 = APPDatabase.getInstance(getActivity()).userDAO().getdata();
-        if(user1 == null)
+        if(APPDatabase.getInstance(getActivity()).userDAO().getdata() == null)
         {
             String name = "Anderson";
             String phone = "+60134589525";
@@ -108,13 +110,14 @@ public class Home extends Fragment implements DrinkApdapter.OnClickItemListener 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        LoyaltyCard loyaltyCard = new LoyaltyCard();
+        requireActivity().getSupportFragmentManager().beginTransaction().add(R.id.loyalty_card_layout,loyaltyCard).commit();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
+        check_insert();
         return inflater.inflate(R.layout.fragment_home, container, false);
     }
     private List<Drink> getlistdrink() {
@@ -132,6 +135,25 @@ public class Home extends Fragment implements DrinkApdapter.OnClickItemListener 
     public void onStart() {
 
         super.onStart();
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        uname.setText(APPDatabase.getInstance(getContext()).userDAO().getdata().getUsername());
+
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
     }
 
     @Override

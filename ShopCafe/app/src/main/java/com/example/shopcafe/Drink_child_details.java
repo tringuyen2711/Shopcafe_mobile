@@ -22,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.shopcafe.database.APPDatabase;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
 public class Drink_child_details extends Fragment {
@@ -368,6 +369,11 @@ public class Drink_child_details extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_drink_child_details, container, false);
+        BottomNavigationView bt = requireActivity().findViewById(R.id.bottomNavigationView);
+        if (bt != null && isAdded()) {
+
+            bt.setVisibility(View.GONE);
+        }
         return view;
     }
 
