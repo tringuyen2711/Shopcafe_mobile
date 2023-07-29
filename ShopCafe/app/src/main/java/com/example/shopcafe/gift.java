@@ -22,7 +22,7 @@ import com.example.shopcafe.database.APPDatabase;
 import java.util.List;
 
 
-public class gift extends Fragment{
+public class gift extends Fragment {
 
     private List<OrderItem> listRewards;
     private List<Integer> listint;
@@ -31,6 +31,7 @@ public class gift extends Fragment{
     RecyclerView revrewards, revLoyalty;
     RewardsAdapter rewardsAdapter;
     OrderViewModel orderViewModel;
+    int sumChangePoints, quantity, point, current_point;
     Button redeem;
     public gift() {
         // Required empty public constructor
@@ -42,6 +43,7 @@ public class gift extends Fragment{
         super.onViewCreated(view, savedInstanceState);
 
         points = view.findViewById(R.id.score_points);
+        points.setText(String.valueOf(current_point));
         redeem = view.findViewById(R.id.reddem_drinks);
         Ndrink = view.findViewById(R.id.ndrink);
         revLoyalty = view.findViewById(R.id.recycler_loyaltycard_rewards);
@@ -60,11 +62,7 @@ public class gift extends Fragment{
             }
         });
 
-        int quantity = orderViewModel.SumOfQuantity();
-        int point = quantity*12;
-        int sumChangePoints = APPDatabase.getInstance(getActivity()).redeemDrinkDAO().getSumPoint();
-        int current_point = point - sumChangePoints;
-        points.setText(String.valueOf(current_point));
+
 
         redeem.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,9 +74,14 @@ public class gift extends Fragment{
 
     }
 
-
-
-
+    @Override
+    public void onStart() {
+        super.onStart();
+        quantity = APPDatabase.getInstance(getContext()).orderitemDAO().SumQuantity();
+        point = quantity*12;
+        sumChangePoints =APPDatabase.getInstance(getContext()).redeemDrinkDAO().getSumPoint();
+        current_point = point - sumChangePoints;
+    }
 
     public static gift newInstance() {
         gift fragment = new gift();
@@ -88,13 +91,41 @@ public class gift extends Fragment{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        quantity = APPDatabase.getInstance(getContext()).orderitemDAO().SumQuantity();
+        point = quantity*12;
+        sumChangePoints =APPDatabase.getInstance(getContext()).redeemDrinkDAO().getSumPoint();
+        current_point = point - sumChangePoints;
 
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        quantity = APPDatabase.getInstance(getContext()).orderitemDAO().SumQuantity();
+        point = quantity*12;
+        sumChangePoints =APPDatabase.getInstance(getContext()).redeemDrinkDAO().getSumPoint();
+        current_point = point - sumChangePoints;
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_gift, container, false);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        quantity = APPDatabase.getInstance(getContext()).orderitemDAO().SumQuantity();
+        point = quantity*12;
+        sumChangePoints =APPDatabase.getInstance(getContext()).redeemDrinkDAO().getSumPoint();
+        current_point = point - sumChangePoints;
+        points.setText(String.valueOf(current_point));
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        quantity = APPDatabase.getInstance(getContext()).orderitemDAO().SumQuantity();
+        point = quantity*12;
+        sumChangePoints =APPDatabase.getInstance(getContext()).redeemDrinkDAO().getSumPoint();
+        current_point = point - sumChangePoints;
+        points.setText(String.valueOf(current_point));
     }
 }

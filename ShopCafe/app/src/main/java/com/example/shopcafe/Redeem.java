@@ -1,9 +1,12 @@
 package com.example.shopcafe;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -18,13 +21,16 @@ public class Redeem extends AppCompatActivity implements Redeem_adapter.OnClickR
 
     RecyclerView recyclerView;
     Redeem_adapter redeem_adapter;
-
+    redeemViewModel redeemViewModel1;
+    OrderViewModel orderViewModel;
     ImageView turnback;
 
+    int sumChangePoints;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_redeem);
+
 
         recyclerView = findViewById(R.id.revRedeem);
         turnback = findViewById(R.id.back_redeem);
@@ -34,8 +40,14 @@ public class Redeem extends AppCompatActivity implements Redeem_adapter.OnClickR
 
         initdata();
 
+        redeemViewModel1 = new ViewModelProvider(Redeem.this).get(redeemViewModel.class);
+        orderViewModel = new ViewModelProvider(Redeem.this).get(OrderViewModel.class);
         redeem_adapter = new Redeem_adapter(redeemDrinks,this);
         recyclerView.setAdapter(redeem_adapter);
+
+
+
+
 
         turnback.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,12 +70,18 @@ public class Redeem extends AppCompatActivity implements Redeem_adapter.OnClickR
 
     @Override
     public void OnClickRedeem(RedeemDrink redeemDrink) {
-        int quantity = APPDatabase.getInstance(this).orderitemDAO().SumQuantity();
+        int quantity = orderViewModel.SumOfQuantity();
         int score = quantity *12;
-        int sumChangePoints = APPDatabase.getInstance(this).redeemDrinkDAO().getSumPoint();
+        sumChangePoints =redeemViewModel1.getSumOfQuantity();
         if((score-sumChangePoints) >= redeemDrink.getDrink_points())
         {
-            APPDatabase.getInstance(this).redeemDrinkDAO().insertDrinkRedeem(redeemDrink);
+
+            new Thread(() -> {
+                APPDatabase.getInstance(this).redeemDrinkDAO().insertDrinkRedeem(redeemDrink);
+        }).start();
         }
+
     }
+
+
 }

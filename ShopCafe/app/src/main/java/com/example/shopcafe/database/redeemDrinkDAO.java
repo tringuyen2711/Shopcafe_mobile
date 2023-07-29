@@ -1,5 +1,6 @@
 package com.example.shopcafe.database;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
@@ -19,4 +20,9 @@ public interface redeemDrinkDAO {
 
     @Query("select sum(drink_points) from redeemdrink")
     int getSumPoint();
+
+    @Query("select * from redeemdrink")
+    LiveData<List<RedeemDrink>> getAllLive();
+
+
 }
