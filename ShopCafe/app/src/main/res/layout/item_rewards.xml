@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/rewards_layout"
-    android:layout_marginBottom="10dp"
+    android:layout_marginBottom="12dp"
     android:background="@drawable/shape_gradient">
 
     <LinearLayout
@@ -22,15 +22,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="TextView"
+                android:textStyle="bold"
+                android:textSize="17sp"
                 android:layout_weight="1"
-                android:layout_marginBottom="10dp"/>
+                android:layout_marginBottom="5dp"/>
 
             <TextView
                 android:id="@+id/datetime"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="TextView"
-                android:layout_weight="1"/>
+                android:textSize="15sp"
+                android:textColor="@color/stroke"
+                android:layout_weight="1"
+                />
         </LinearLayout>
         <TextView
             android:id="@+id/score_rewards"
@@ -38,7 +43,10 @@
             android:layout_height="match_parent"
             android:layout_weight="2"
             android:text="TextView"
-            android:gravity="center"/>
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            />
 
 
     </LinearLayout>

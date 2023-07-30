@@ -40,7 +40,7 @@ public class orderAdapter extends RecyclerView.Adapter<orderAdapter.OrderViewHol
 
         holder.name.setText(orderItem.getName());
         holder.date_time.setText(orderItem.getDate());
-        holder.money_order.setText(orderItem.getPrice());
+        holder.money_order.setText("$"+orderItem.getPrice()+".00");
         holder.address_order.setText(orderItem.getAddress());
     }
 

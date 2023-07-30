@@ -236,6 +236,11 @@ public class Drink_child_details extends Fragment {
         left_arrow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                BottomNavigationView bt = requireActivity().findViewById(R.id.bottomNavigationView);
+                if (bt != null && isAdded()) {
+
+                    bt.setVisibility(View.VISIBLE);
+                }
                 getActivity().getSupportFragmentManager().popBackStack();
             }
         });
@@ -243,10 +248,16 @@ public class Drink_child_details extends Fragment {
         addtocart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 drinkCart = new DrinkCart(name1,shot,select,size,ice,quantity,img1,temp_cal);
                 APPDatabase.getInstance(getActivity()).drinkcartDAO().insertCart(drinkCart);
                 Intent intent = new Intent(getActivity(), Checkout.class);
                 startActivity(intent);
+                BottomNavigationView bt = requireActivity().findViewById(R.id.bottomNavigationView);
+                if (bt != null && isAdded()) {
+
+                    bt.setVisibility(View.VISIBLE);
+                }
             }
         });
 
@@ -255,6 +266,11 @@ public class Drink_child_details extends Fragment {
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), Checkout.class);
                 startActivity(intent);
+                BottomNavigationView bt = requireActivity().findViewById(R.id.bottomNavigationView);
+                if (bt != null && isAdded()) {
+
+                    bt.setVisibility(View.VISIBLE);
+                }
             }
         });
     }
@@ -377,7 +393,14 @@ public class Drink_child_details extends Fragment {
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        BottomNavigationView bt = requireActivity().findViewById(R.id.bottomNavigationView);
+        if (bt != null && isAdded()) {
 
-
+            bt.setVisibility(View.GONE);
+        }
+    }
 }
 
