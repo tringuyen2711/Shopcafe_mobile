@@ -1,5 +1,6 @@
 package com.example.shopcafe;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -12,6 +13,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -35,10 +39,18 @@ public class trackorder extends Fragment {
         trackorder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Fragment fra = order.newInstance();
-                getActivity().getSupportFragmentManager().popBackStack("details", FragmentManager.POP_BACK_STACK_INCLUSIVE);
-                FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.trackorder_layout, fra).commit();
+                /*Fragment fra = order.newInstance();*/
+                Timer timer = new Timer();
+                timer.schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        getActivity().getSupportFragmentManager().popBackStack("details", FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                        getActivity().getSupportFragmentManager().popBackStack("track", FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                    }
+                },2000);
+
+                /*FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.trackorder_layout, fra).commit();*/
             }
         });
     }

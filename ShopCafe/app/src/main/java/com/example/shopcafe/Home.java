@@ -127,6 +127,8 @@ public class Home extends Fragment implements DrinkApdapter.OnClickItemListener 
             list.add(new Drink(R.drawable.capuchino, "Capuchino", Drink.TYPE_DRINK, 20));
             list.add(new Drink(R.drawable.mocha, "Mocha", Drink.TYPE_DRINK, 30));
             list.add(new Drink(R.drawable.flatwhite, "Flat White", Drink.TYPE_DRINK, 35));
+            list.add(new Drink(R.drawable.lattemacchiato, "Latte Macchiato", Drink.TYPE_DRINK, 40));
+            list.add(new Drink(R.drawable.affogato, "Affogato", Drink.TYPE_DRINK, 50));
         }
         return list;
     }

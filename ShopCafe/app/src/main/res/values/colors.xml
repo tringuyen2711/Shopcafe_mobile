@@ -6,4 +6,8 @@
     <color name="shape_gradient">#324A59</color>
     <color name="redeem">#30A2CDE9</color>
     <color name="stroke">#D8D8D8</color>
+    <color name="home">#FED6B4</color>
+    <color name="rewards">#CCB2AE</color>
+    <color name="itemreward">#6E5B62</color>
+    <color name="Redeem">#898885</color>
 </resources>

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/checkoutlayout"
-    android:background="@color/white"
+    android:background="@drawable/cartlayout"
     tools:context=".Checkout">
 
     <ImageButton
@@ -58,7 +58,8 @@
         android:layout_marginTop="8dp"
         android:text="TextView"
         android:gravity="center"
-        android:textSize="15sp"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView8"

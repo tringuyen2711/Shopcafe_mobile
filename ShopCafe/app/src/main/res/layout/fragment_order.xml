@@ -7,7 +7,7 @@
     android:id="@+id/order_layout"
     android:focusable="true"
     android:clickable="true"
-    android:background="@color/white"
+    android:background="@drawable/orderlayout"
     tools:context=".order"
     >
 

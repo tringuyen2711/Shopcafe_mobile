@@ -254,10 +254,6 @@ public class Drink_child_details extends Fragment {
                 Intent intent = new Intent(getActivity(), Checkout.class);
                 startActivity(intent);
                 BottomNavigationView bt = requireActivity().findViewById(R.id.bottomNavigationView);
-                if (bt != null && isAdded()) {
-
-                    bt.setVisibility(View.VISIBLE);
-                }
             }
         });
 
@@ -267,10 +263,7 @@ public class Drink_child_details extends Fragment {
                 Intent intent = new Intent(getActivity(), Checkout.class);
                 startActivity(intent);
                 BottomNavigationView bt = requireActivity().findViewById(R.id.bottomNavigationView);
-                if (bt != null && isAdded()) {
 
-                    bt.setVisibility(View.VISIBLE);
-                }
             }
         });
     }

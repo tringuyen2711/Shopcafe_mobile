@@ -102,7 +102,7 @@ public class Checkout extends AppCompatActivity implements DrinkCartAdapter.OnCl
 
                 cartViewModel.deleteAll();
                 trackorder temp = new trackorder();
-                getSupportFragmentManager().beginTransaction().replace(R.id.checkoutlayout,temp).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.checkoutlayout,temp).addToBackStack("track").commit();
             }
         });
     }
@@ -125,6 +125,17 @@ public class Checkout extends AppCompatActivity implements DrinkCartAdapter.OnCl
         list.remove(cartitem);
         cartViewModel.deleteCartItem(cartitem);
         drinkCartAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        finish();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
     }
 
 
