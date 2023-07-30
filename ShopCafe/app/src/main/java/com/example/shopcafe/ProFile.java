@@ -71,7 +71,7 @@ public class ProFile extends AppCompatActivity {
                         if (i == KeyEvent.KEYCODE_ENTER) {
                             e_phone.setEnabled(false);
                             temp_phone = e_phone.getText().toString();
-                            u1.setEmail(temp_phone);
+                            u1.setPhone(temp_phone);
                             hideSoftKeyboard(e_phone);
                             return true;
                         }
@@ -118,7 +118,7 @@ public class ProFile extends AppCompatActivity {
                         if (i == KeyEvent.KEYCODE_ENTER) {
                             e_address.setEnabled(false);
                             temp_address = e_address.getText().toString();
-                            u1.setEmail(temp_address);
+                            u1.setAddress(temp_address);
                             hideSoftKeyboard(e_address);
                             return true;
                         }

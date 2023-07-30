@@ -30,6 +30,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="TextView"
+                android:textStyle="bold"
+                android:textSize="15sp"
                 android:layout_weight="0.2"
                 android:gravity="bottom"/>
 
@@ -47,6 +49,8 @@
                 android:layout_height="45dp"
                 android:layout_weight="0.2"
                 android:text="TextView"
+                android:textSize="15sp"
+                android:textStyle="bold"
                 android:gravity="top"/>
         </LinearLayout>
 
@@ -61,6 +65,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="TextView"
+                android:textStyle="bold"
+                android:textSize="17sp"
                 android:gravity="center"/>
         </LinearLayout>
     </LinearLayout>

@@ -17,10 +17,14 @@ public class LoyaltyAdapter extends RecyclerView.Adapter<LoyaltyAdapter.LoyaltyV
     List<CupLoyalty> i_cup;
     int current_cup;
 
-    public LoyaltyAdapter(List<CupLoyalty> i_cup, int current_cup) {
+    public void setData(List<CupLoyalty> i_cup, int current_cup)
+    {
         this.i_cup = i_cup;
         this.current_cup = current_cup;
         notifyDataSetChanged();
+    }
+
+    public LoyaltyAdapter() {
     }
 
     @NonNull

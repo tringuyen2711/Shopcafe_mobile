@@ -57,15 +57,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/My_points"
+            android:textColor="@color/white"
             android:textSize="15dp"
             android:textStyle="bold"
-            android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.207"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.227" />
+            app:layout_constraintVertical_bias="0.227"
+            tools:ignore="TextSizeCheck" />
 
         <TextView
             android:id="@+id/score_points"
@@ -80,7 +81,8 @@
             app:layout_constraintHorizontal_bias="0.262"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView5"
-            app:layout_constraintVertical_bias="0.307" />
+            app:layout_constraintVertical_bias="0.307"
+            tools:ignore="TextSizeCheck" />
 
         <Button
             android:id="@+id/reddem_drinks"

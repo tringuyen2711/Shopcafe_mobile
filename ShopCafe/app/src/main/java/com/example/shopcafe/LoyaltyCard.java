@@ -60,7 +60,8 @@ public class LoyaltyCard extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false);
         revLoyalty.setLayoutManager(linearLayoutManager);
 
-        adapterLoyal = new LoyaltyAdapter(cupLoyalties,current_cup);
+        adapterLoyal = new LoyaltyAdapter();
+        adapterLoyal.setData(cupLoyalties,current_cup);
         revLoyalty.setAdapter(adapterLoyal);
 
     }
@@ -70,6 +71,22 @@ public class LoyaltyCard extends Fragment {
         super.onCreate(savedInstanceState);
 
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        current_cup = (APPDatabase.getInstance(getContext()).orderitemDAO().SumQuantity()) %8;
+        adapterLoyal.setData(cupLoyalties,current_cup);
+        ndrink.setText(String.valueOf(current_cup)+"/8");
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        current_cup = (APPDatabase.getInstance(getContext()).orderitemDAO().SumQuantity()) %8;
+        adapterLoyal.setData(cupLoyalties,current_cup);
+        ndrink.setText(String.valueOf(current_cup)+"/8");
     }
 
     @Override

@@ -36,6 +36,7 @@
             android:layout_marginStart="24dp"
             android:layout_marginBottom="16dp"
             android:text="TextView"
+            android:textColor="@color/stroke"
             android:textStyle="bold"
             android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="parent"

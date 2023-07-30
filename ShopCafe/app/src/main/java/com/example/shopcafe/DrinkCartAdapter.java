@@ -42,11 +42,11 @@ public class DrinkCartAdapter extends RecyclerView.Adapter<DrinkCartAdapter.Cast
         if(drinkcart == null) {
             return;
         }
-        String detail = drinkcart.getShot()+"|" + drinkcart.getSelect()
-                +"|"+ drinkcart.getSize()+"|"+drinkcart.getIce();
+        String detail = drinkcart.getShot()+" | " + drinkcart.getSelect()
+                +" | "+ drinkcart.getSize()+" | "+drinkcart.getIce();
         holder.dname.setText(drinkcart.getName());
         holder.ddetail.setText(detail);
-        holder.dmoney.setText(String.valueOf(drinkcart.getTotal()));
+        holder.dmoney.setText("$"+String.valueOf(drinkcart.getTotal())+".00");
         holder.dquantity.setText("x"+ drinkcart.getQuantity());
         holder.img.setImageResource(drinkcart.getImg());
 
